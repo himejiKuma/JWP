@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    
+
+
+    <div id="app" style="text-align: center;">
+    <p v-once>
+    {{message}}
+    </p>
+    <p>{{number + 3}}</p>
+    <p>{{ok ? "it is okay": "it is not okay"}}</p>
+    
+    <p v-text="message"></p>
+    <button v-on:click="reverseMessage22">
+    メッセージ変換
+    </button>
+    <div v-html="html"></div>
+    <a :[attribute2]="url">Google</a>
+    <a :[attribute2]="urlTwitter" :id="number">Twitter</a>
+    <a v-bind="{href: url, id: number2, class: message}">TEST</a>
+    <a v-bind="testObject">TEST2</a>
+    <p>現在{{number}}回</p>
+    <button v-on:click="countup(2)">カウントアップ
+    </button>
+    <p v-on:mousemove="countdown">カウントダウン</p>
+    <p v-on:mousemove="mouseposition(2, $event)">マウスの位置
+        <span v-on:mousemove.stop.prevent>
+            反応しないでください
+        </span>
+    </p>
+    <a v-on:click.prevent="noClickEvent" href="https://google.com">Google</a>
+    <p>X:{{x}}, Y:{{y}}</p>
+    <input type="text" v-on:keyup.space.enter = "myAlert">
+    <!--keyup -> keyboard누르고 떼어냈을때 트리거됨-->
+    <!--keyup.enter enter를 누르면 트리거-->
+    <!-- keyup.space space누르면 트리거됨-->
+
+
+    <button @click="countdown">countdown</button>
+    <input type="text" v-model="message">
+    <h1>{{message}}</h1>
+
+    <p>{{ sayHi() }}</p>
+
+    <p>{{counter}}</p>
+    
+    <button @click="counter += 1">+1</button>
+    <p>{{ lessThanThree }}</p><!--computed 로 함수를 불러들인 경우 computed 의 경우에는 괄호를 붙이지 말것-->
+    <p>{{lessThanThreeMethod()}}</p><!--  method로 함수로 불러들인 경우  반드시 괄호를 붙일 것-->
+    <!-- 같은 동작을 하는 것처럼 보이지만 computed는 computed내에 있는 변수가 변했을 경우에만
+    진행 되는 함수 
+    하지만 method의 경우에는 무언가 이벤트가 실행되었을 때마다 실행되기 때문에 대규모의 프로젝트의 경우에는
+    적합하지 않으므로 사용에 주의 해야함-->
+    <!--괄호를 붙이는 경우와 붙이지 말아할 경우!!
+    2중 중괄호 (머스태쉬)안에는 computed함수의 경우 괄호를 붙이지말고 메소드의 경우에는 반드시 괄호를 붙여야할 것
+    하지마 button의 click 의 경우에는 괄호를 붙이던 안붙이던 차이가 없음
+    ex)@click ="counter"
+        @click = "counter()"는 같은 의미
+    
+    -->
+
+    <p>{{otherCounter}}</p>
+    
+    <button @click="otherCounter += 1">other+1</button>
+
+    <h1 :class="classObject">{{messageforVmodel}}</h1>
+    <button @click="isActive = !isActive">active change</button>
+    <!-- 하이픈을 사용하는 경우에는 쿼테이션을 양쪽에 붙여야 함-->
+
+    <h1 :class="[{red:isActive},bg]" :style="styleArray">HELLo for Array</h1>
+    <span v-if="vifvar">This is sample for V-if directory </span>
+    <span v-else-if="velseifvar">This is sample of v-else-if </span>
+    <span v-else>This is sample of v-else</span>
+    <!-- v-else 는 v-if의 직후가 아니면 사용할 수 없음 -->
+    <template v-if="viftemplate"> <!--복수의 요소를 조건분기로 표시하기 위해서 템플렛이라는 html요소가 사용되고 인터넷 검증을 해도 표시 되지 않기 때문에 자주 사용됨-->
+        <p>
+            This is sample of v-if using HTML template
+        </p>
+        <p>This is sameple of v-if template</p>
+    </template>
+    <button @click="viftemplate = !viftemplate">Button</button>
+    <p>
+        v-show를 이용한 표시제어
+    </p><!-- v-show 를 통해 css의 디스플레이의 표시 비표시로 설정할 수 있음 v-if의 경우에는 렌더링으로 표시를 제어하고 v-show는 css로 제어-->
+    <p v-show= "!viftemplate">v-show를 이용한 제어</p>
+    <!-- 빈번하게 표시 제어를 바꿀 경우에는 css로 표시를 제어하는 편이 빠르지만 표시가 거의 바뀌지않는 경우에는 렌더링으로 표시제어하는 것이 효율적
+    렌더링의 경우 빈번히 표시,비표시를 바꿀 경우 요소 자체를 삭제하는 거기 때문에 부담이 걸리고  속도가 느림-->
+    <ul>v-for를 이용한 리스트 표시
+        <li v-for="(onefruit, index) in fruits">({{index}}){{onefruit}} 배열 렌더링</li>
+
+    </ul>
+    <ul>
+        <li v-for="(value,key,index) in username">{{value}} ({{key}}) index = ({{index}})오브젝트 렌더링</li>
+    </ul>
+    <ul>
+        <template v-for="user in username">
+        <li>{{user}}
+            template 을 이용한 v-for렌더링
+        </li>
+        <hr>
+    </template>
+    </ul>
+    <ul>
+        <li v-for="n of 10">{{n}}</li><!--v-for 에서는 숫자 수만큼 렌더링 하는 것도 가능하다 !!-->
+    </ul>
+    <ul><div v-for="(fruit, index) of fruits" :key="fruit"><p>{{fruit}}</p><input type="text"></div></ul>
+    <!-- v-for 를 사용할 때에는 반드시 키 속성을 사용해서 사용해서 동기화 시킬 수있도록한다.-->
+    <button @click="removefruit">RemoveFRruit</button>
+    </div>
+    <div id="app2">{{message}}</div>
+    <script>
+    new Vue({
+        el: '#app',
+      data: {
+          message : 'Hello World!!2',
+          number : 3,
+          counter: 0,
+          otherCounter: 0,
+          ok : true,
+          html : '<h1>it is h1 tag</h1>',
+          url : 'https://www.google.com',
+          attribute2 : 'href',
+          urlTwitter : "https://twitter.com",
+          number2: 31,
+          x:0,
+          y:0,
+          testObject :{href: 'https://www.google.com', id:31, class:'testClass'},
+          event: 'click',
+          messageforVmodel : 'this is for v-model',
+          isActive : true,
+          color: 'red',
+          bg : 'bg-blue',
+          txtcolor: 'red',
+          bgcolor: 'blue',
+          styleArray:{
+              color:'red',
+              'background-color':'yellow'
+          },
+          vifvar : false,
+          velseifvar : true,
+          viftemplate: true,
+          fruits : ["Apple","Banana","strawberry"],
+          username : {
+              firstname : "재원",
+              lastname : "옥",
+              age : "29"
+
+          }
+          //countdown : 'click'
+      },
+      computed:{
+        lessThanThree: function(){
+            console.log('less than three computed is working ')
+            return this.counter > 3 ? 'it is larger than 3 ' : this.counter
+            //return 은 동기처리에서 사용되고 비동기처리에서는 그다지 사용되지않음
+        },
+        classObject : function(){
+            return {red:this.isActive , 'bg-blue':!this.isActive}
+        },
+        styleObject : function(){
+            return {color:this.color , 'background-color':this.bgcolor}
+        }
+      },watch:{//비동기처리
+        counter: function(){
+            var vm = this;
+            setTimeout(function(){
+                vm.counter = 0
+                vm.number2 = 0
+            },3000)
+        }
+      },
+      methods:{
+          lessThanThreeMethod : function(){
+              console.log('less than three method is working ')
+            return this.counter > 3 ? 'it is larger than 3 ' : this.counter
+          },
+          reverseMessage22: function(){
+            this.message = 'it is for me',
+            this.ok = false
+        },
+        sayHi: function(){
+            this.message = 'Hello VueJS'
+            return this.number;
+        },
+        countup: function(para){
+            this.number += 1*para
+        },
+        countdown : function(){
+            this.number -= 1
+        },
+        mouseposition : function(num, event){
+           this.x =  event.clientX / num,
+           this.y = event.clientY /num
+        },
+        noEvent : function(event){
+            event.stopPropagation()
+        },
+        noClickEvent : function(event){
+            event.preventDefault()
+        },
+        myAlert(){
+            alert('alert!!!')
+        },
+        removefruit: function(){
+            this.fruits.shift()
+        }
+
+      }
+    })
+    new Vue({
+        el:'#app2',
+        data:{
+            message:'test'
+        }
+    })</script>
+</body>
+</html>

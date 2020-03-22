@@ -1,0 +1,26 @@
+Vue CLI에 관해서..
+
+・왜 사용하는가?
+-대규모 프로젝트에서의 파일의 분할
+-최종적인 코드의 경량화
+-Babel,TypeScript,ESLint등의 플러그인의 사용
+-HMR(Hot Module Replacement)
+-.vue, TS, SCSS, Pug, ES6 등의 사용
+
+Vue CLI 설치법
+1.node.js설치
+-node.js홈페이지에서 node.js설치한다. 터미널에서 node -v를 입력하면 node.js의 버전을 확인할 수 있다.
+
+2.npm(node package manager) install
+터미널에 sudo npm install -g @vue/cli를 입력(g 는 글로벌의 의미)
+
+3.vue --version으로 vue의 버전 확인이 가능하다
+
+4.vue create 프로젝트명 입력
+vue create udemy-vuejs를 터미널에 입력
+//에러가 발생할 경우 권한 을 확인하고 sudo -i를 이용해서 루트 계정으로 전환한다.
+
+5. cd 디렉토리명으로 설치한 디렉토리로 이동후 npm run serve로 설치 완료
+
+6.본판 이행 코드 : sudo npm run build
+
